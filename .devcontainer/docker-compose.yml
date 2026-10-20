@@ -1,0 +1,28 @@
+services:
+  streamlit:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: review-nlp-pipeline:latest
+    container_name: review_nlp_streamlit
+    volumes:
+      - ..:/workspaces/review-nlp-pipeline:cached
+    working_dir: /workspaces/review-nlp-pipeline
+    ports:
+      - "8501:8501"
+    environment:
+      - ENV=production
+      - TF_ENABLE_ONEDNN_OPTS=0
+      - TF_CPP_MIN_LOG_LEVEL=2
+    restart: unless-stopped
+    command:
+      - streamlit
+      - run
+      - app/main.py
+      - --server.port=8501
+      - --server.address=0.0.0.0
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

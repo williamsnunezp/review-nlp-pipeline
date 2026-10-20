@@ -1,0 +1,16 @@
+# 2. Procesamiento de datos e inferencia de modelos
+pandas
+numpy
+tensorflow-cpu
+scikit-learn==1.6.1
+openpyxl
+
+# 3. Herramientas de NLP (Mantén solo la que use tu modelo)
+nltk
+spacy
+
+# 3. Interfaz de usuario y utilidades
+streamlit
+python-dotenv
+tqdm
+requests
